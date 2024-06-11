@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Smartschool Score Improver",
   "version": "1.0",
-  "description": "Improves the user experience on Smartschool.",
-  "author": "David Tanasescu/dFuZe/Alm0stEthical | https://dfuze.vip/#contact",
+  "description": "Improves the grade colours on Smartschool!",
+  "author": "David Tanasescu (dFuZe) | https://dfuze.vip/",
   "permissions": ["activeTab"],
   "host_permissions": ["https://*.smartschool.be/*"],
   "content_scripts": [
