@@ -1,14 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const toggleButton = document.getElementById("toggleScript");
+  const toggleScript = document.getElementById("toggleScript");
+  const toggleRedPoints = document.getElementById("toggleRedPoints");
 
-  chrome.storage.sync.get("colorEnhancementsEnabled", (data) => {
-    toggleButton.checked = data.colorEnhancementsEnabled;
+  chrome.storage.sync.get(["colorEnhancementsEnabled", "keepRedPoints"], (data) => {
+    toggleScript.checked = data.colorEnhancementsEnabled;
+    toggleRedPoints.checked = data.keepRedPoints;
   });
+});
 
-  toggleButton.addEventListener("change", () => {
-    const isEnabled = toggleButton.checked;
-    chrome.runtime.sendMessage({ action: "toggle", enabled: isEnabled });
-  });
+toggleScript.addEventListener("change", () => {
+  const isEnabled = toggleScript.checked;
+  chrome.runtime.sendMessage({ action: "toggle", enabled: isEnabled });
+});
+
+toggleRedPoints.addEventListener("change", () => {
+  const isEnabled = toggleRedPoints.checked;
+  chrome.runtime.sendMessage({ action: "toggleRedPoints", enabled: isEnabled });
 });
 
 var speed = 80;

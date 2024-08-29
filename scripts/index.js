@@ -82,28 +82,32 @@ const replaceProperties = (element, oldProps, newProps) => {
   });
 };
 
-const applyColorEnhancements = () => {
+const applyColorEnhancements = (keepRedPoints) => {
   const allElements = document.querySelectorAll("div, button, circle");
 
   Object.entries(colorData).forEach(([color, data]) => {
     if (data.mappings) {
       const { old, new: newProps } = data.mappings;
-      allElements.forEach((element) => {
-        replaceProperties(element, old, newProps);
-      });
+      if (color !== 'red' || !keepRedPoints) {
+        allElements.forEach((element) => {
+          replaceProperties(element, old, newProps);
+        });
+      }
     }
   });
 };
 
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "applyColorEnhancements") {
-    applyColorEnhancements();
+    chrome.storage.sync.get("keepRedPoints", (data) => {
+      applyColorEnhancements(data.keepRedPoints);
+    });
   }
 });
 
-chrome.storage.sync.get("colorEnhancementsEnabled", (data) => {
+chrome.storage.sync.get(["colorEnhancementsEnabled", "keepRedPoints"], (data) => {
   if (data.colorEnhancementsEnabled) {
-    applyColorEnhancements();
-    setInterval(applyColorEnhancements, 1);
+    applyColorEnhancements(data.keepRedPoints);
+    setInterval(() => applyColorEnhancements(data.keepRedPoints), 1);
   }
 });
