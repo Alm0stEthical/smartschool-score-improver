@@ -225,61 +225,6 @@ a {
   z-index: 1;
 }
 
-#idea {
-  animation: gradient-animation 2.5s ease infinite;
-  font-weight: bold;
-  background: linear-gradient(45deg, #ff7e5f, #feb47b);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-animation 2.5s ease infinite;
-}
-
-#code-fixer {
-  font-weight: bold;
-  background: linear-gradient(45deg, #00c9ff, #92fe9d);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-animation 2.5s ease infinite;
-}
-
-#designer {
-  font-weight: bold;
-  background: linear-gradient(45deg, #f953c6, #b91d73);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-animation 2.5s ease infinite;
-}
-
-#tester {
-  font-weight: bold;
-  background: linear-gradient(45deg, #ff6a00, #ee0979);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-animation 2.5s ease infinite;
-}
-
-#supporter {
-  font-weight: bold;
-  background: linear-gradient(45deg, #3a1c71, #d76d77, #ffaf7b);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-animation 2.5s ease infinite;
-}
-
-#documenter {
-  font-weight: bold;
-  background: linear-gradient(45deg, #fc5c7d, #6a82fb);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-animation 2.5s ease infinite;
-}
-
 .card::before {
   content: "";
   position: absolute;

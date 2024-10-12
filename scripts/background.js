@@ -2,14 +2,13 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({
     colorEnhancementsEnabled: true,
     keepRedPoints: false,
-    flexModeEnabled: false // Default is false for Flex Op Iedereen mode
+    flexModeEnabled: false
   });
 });
 
 chrome.webNavigation.onCompleted.addListener((details) => {
-  // Check if Flex Op Iedereen Mode is enabled
   chrome.storage.sync.get("flexModeEnabled", (data) => {
-    if (data.flexModeEnabled) { // Only inject if Flex Mode is enabled
+    if (data.flexModeEnabled) {
       chrome.scripting.executeScript({
         target: { tabId: details.tabId },
         func: overrideFetch,
