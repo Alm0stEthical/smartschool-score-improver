@@ -9,15 +9,17 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.webNavigation.onCompleted.addListener((details) => {
   chrome.storage.sync.get("flexModeEnabled", (data) => {
     if (data.flexModeEnabled) {
-      chrome.scripting.executeScript({
-        target: { tabId: details.tabId },
-        func: overrideFetch,
-        world: 'MAIN'
-      }, () => {
-        if (chrome.runtime.lastError) {
-          console.error('Error injecting script:', chrome.runtime.lastError);
-        }
-      });
+      setTimeout(() => {
+        chrome.scripting.executeScript({
+          target: { tabId: details.tabId },
+          func: overrideFetch,
+          world: 'MAIN'
+        }, () => {
+          if (chrome.runtime.lastError) {
+            console.error('Error injecting script:', chrome.runtime.lastError);
+          }
+        });
+      }, 2);
     }
   });
 }, { url: [{ urlMatches: '.*\\.smartschool\\.be/.*' }] });
