@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Smartschool Score Improver",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Improve your Smartschool grades! Failing grades turn black & above 50% turn green, smarter look.",
-  "author": "David Tanasescu (dFuZe) | https://dfuze.vip/",
-  "permissions": ["storage"],
+  "author": "David Tanasescu",
+  "permissions": ["storage", "scripting", "activeTab", "webNavigation"],
   "host_permissions": ["https://*.smartschool.be/*"],
   "background": {
     "service_worker": "scripts/background.js"
