@@ -99,9 +99,18 @@ chrome.runtime.onMessage.addListener((message) => {
   }
 });
 
+// Set default values on first install
 chrome.storage.sync.get(["colorEnhancementsEnabled", "keepRedPoints", "flexModeEnabled"], (data) => {
-  if (data.flexModeEnabled) {
+  // If no values exist, set defaults
+  if (data.colorEnhancementsEnabled === undefined) {
+    chrome.storage.sync.set({ colorEnhancementsEnabled: true, keepRedPoints: false, flexModeEnabled: false });
+    // Apply immediately with default values
+    applyColorEnhancements(false);
+    setInterval(() => applyColorEnhancements(false), 1);
+  } else if (data.flexModeEnabled) {
+    // Do nothing for flex mode
   } else if (data.colorEnhancementsEnabled) {
+    // Apply saved settings
     applyColorEnhancements(data.keepRedPoints);
     setInterval(() => applyColorEnhancements(data.keepRedPoints), 1);
   }
