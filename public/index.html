@@ -2,56 +2,161 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link href="./styles/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles/styles.css" />
-    <link rel="stylesheet" href="./styles/fontawesome/all.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f3f4f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .credit-banner {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: white;
+        text-align: center;
+        padding: 8px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 16px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .credit-banner a {
+        text-decoration: none;
+        font-weight: bold;
+        color: #00b683;
+        transition: all 0.2s ease;
+      }
+      .credit-banner a:hover {
+        color: #00d49a;
+        text-shadow: 0 0 8px rgba(0, 182, 131, 0.3);
+      }
+      .container {
+        width: 400px;
+        padding: 24px;
+        box-sizing: border-box;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .card-header {
+        margin-bottom: 24px;
+        text-align: center;
+      }
+      img {
+        width: 72px;
+        height: 72px;
+        margin-bottom: 16px;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #00b683;
+        margin: 0;
+      }
+      h5 {
+        font-weight: 600;
+        font-size: 18px;
+        color: #333333;
+        margin-bottom: 20px;
+        align-self: flex-start;
+      }
+      .toggle-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .toggle-container span {
+        font-weight: 600;
+        font-size: 16px;
+        color: #444444;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #a0aec0;
+        border-radius: 26px;
+        transition: 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 2px;
+        bottom: 2px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        transition: 0.3s;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      }
+      input:checked + .slider {
+        background-color: #00b683;
+      }
+      input:checked + .slider:before {
+        transform: translateX(24px);
+      }
+      .text-red-500 {
+        color: #e53e3e;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-      <div class="card text-center">
-        <div class="card-header">
-          <img src="./images/icons/icon128.png" alt="Smartschool Score Improver Icon" />
-          <h1 class="gradient-text fw-bold" style="font-size: 25px; padding: 0px; margin: 0px">
-            Smartschool Score Improver
-          </h1>
-        </div>
-
-        <div>
-          <div class="settings-container">
-            <h5 class="card-title gradient-text fw-bold">Settings</h5>
-            <div class="toggle-container">
-              <span class="toggle-text">Enable Score Improver</span>
-              <label class="switch">
-                <input type="checkbox" id="toggleScript" checked />
-                <span class="slider"></span>
-              </label>
-            </div>
-            <div class="toggle-container">
-              <span class="toggle-text">Keep Red Points</span>
-              <label class="switch">
-                <input type="checkbox" id="toggleRedPoints" />
-                <span class="slider"></span>
-              </label>
-            </div>
-
-            <div class="toggle-container">
-              <span class="toggle-text text-red-500">100% MODE (BETA)</span>
-              <label class="switch">
-                <input type="checkbox" id="toggleFlexMode" />
-                <span class="slider"></span>
-              </label>
-            </div>
-
-            <h5 class="card-title gradient-text fw-bold">Contributors</h5>
-            <div class="contributor-container">
-              <div class="card-text align-left">
-                <a href="https://davidtanasescu.com/" target="_blank">
-                  <span id="developer"><i class="fas fas fa-code"></i> Developer</span>: David Tanasescu
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="credit-banner">
+        Made by the one and only
+        <a href="https://davidtanasescu.com" target="_blank">David Tanasescu</a>
+      </div>
+      <div class="card-header">
+        <img src="./icons/icon128.png" alt="Smartschool Score Improver Icon" />
+        <h1>Smartschool Score Improver</h1>
+      </div>
+      <h5>Settings</h5>
+      <div class="toggle-container">
+        <span>Enable Score Improver</span>
+        <label class="switch">
+          <input type="checkbox" id="toggleScript" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-container">
+        <span>Keep Red Points</span>
+        <label class="switch">
+          <input type="checkbox" id="toggleRedPoints" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-container">
+        <span class="text-red-500">100% MODE </span>
+        <label class="switch">
+          <input type="checkbox" id="toggleFlexMode" />
+          <span class="slider"></span>
+        </label>
       </div>
     </div>
     <script src="./scripts/index.js"></script>
