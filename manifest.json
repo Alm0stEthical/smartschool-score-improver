@@ -7,21 +7,21 @@
   "permissions": ["storage", "scripting", "activeTab", "webNavigation"],
   "host_permissions": ["https://*.smartschool.be/*"],
   "background": {
-    "service_worker": "./public/scripts/background.js"
+    "service_worker": "public/scripts/background.js"
   },
   "content_scripts": [
     {
       "matches": ["https://*.smartschool.be/results/main/results/details/*"],
-      "js": ["./public/scripts/index.js"]
+      "js": ["public/scripts/index.js"]
     }
   ],
   "icons": {
-    "16": "./public/icons/icon16.png",
-    "32": "./public/icons/icon32.png",
-    "48": "./public/icons/icon48.png",
-    "128": "./public/icons/icon128.png"
+    "16": "public/icons/icon16.png",
+    "32": "public/icons/icon32.png",
+    "48": "public/icons/icon48.png",
+    "128": "public/icons/icon128.png"
   },
   "action": {
-    "default_popup": "./public/index.html"
+    "default_popup": "public/index.html"
   }
 }
