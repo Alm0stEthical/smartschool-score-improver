@@ -106,17 +106,18 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 
 chrome.storage.sync.get(
-  ["colorEnhancementsEnabled", "keepRedPoints", "flexModeEnabled"],
+  ["colorEnhancementsEnabled", "keepRedPoints", "flexModeEnabled", "realismModeEnabled"],
   (data) => {
     if (data.colorEnhancementsEnabled === undefined) {
       chrome.storage.sync.set({
         colorEnhancementsEnabled: true,
         keepRedPoints: false,
         flexModeEnabled: false,
+        realismModeEnabled: false,
       });
       applyColorEnhancements(false);
       setInterval(() => applyColorEnhancements(false), 1);
-    } else if (data.flexModeEnabled) {
+    } else if (data.flexModeEnabled || data.realismModeEnabled) {
     } else if (data.colorEnhancementsEnabled) {
       applyColorEnhancements(data.keepRedPoints);
       setInterval(() => applyColorEnhancements(data.keepRedPoints), 1);
@@ -128,16 +129,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleScript = document.getElementById("toggleScript");
   const toggleRedPoints = document.getElementById("toggleRedPoints");
   const toggleFlexMode = document.getElementById("toggleFlexMode");
+  const toggleRealismMode = document.getElementById("toggleRealismMode");
 
-  if (toggleScript && toggleRedPoints && toggleFlexMode) {
+  if (toggleScript && toggleRedPoints && toggleFlexMode && toggleRealismMode) {
     chrome.storage.sync.get(
-      ["colorEnhancementsEnabled", "keepRedPoints", "flexModeEnabled"],
+      ["colorEnhancementsEnabled", "keepRedPoints", "flexModeEnabled", "realismModeEnabled"],
       (data) => {
         toggleScript.checked = data.colorEnhancementsEnabled;
         toggleRedPoints.checked = data.keepRedPoints;
         toggleFlexMode.checked = data.flexModeEnabled;
+        toggleRealismMode.checked = data.realismModeEnabled;
 
-        if (data.flexModeEnabled) {
+        if (data.flexModeEnabled || data.realismModeEnabled) {
           toggleScript.disabled = true;
           toggleRedPoints.disabled = true;
         }
@@ -164,17 +167,56 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isEnabled) {
         toggleScript.disabled = true;
         toggleRedPoints.disabled = true;
+        toggleRealismMode.disabled = true;
         toggleScript.checked = false;
         toggleRedPoints.checked = false;
+        toggleRealismMode.checked = false;
 
         chrome.runtime.sendMessage({ action: "toggle", enabled: false });
         chrome.runtime.sendMessage({
           action: "toggleRedPoints",
           enabled: false,
         });
+        chrome.runtime.sendMessage({
+          action: "toggleRealismMode",
+          enabled: false,
+        });
+        location.reload();
       } else {
         toggleScript.disabled = false;
         toggleRedPoints.disabled = false;
+        toggleRealismMode.disabled = false;
+        location.reload();
+      }
+    });
+
+    toggleRealismMode.addEventListener("change", () => {
+      const isEnabled = toggleRealismMode.checked;
+      chrome.storage.sync.set({ realismModeEnabled: isEnabled });
+
+      if (isEnabled) {
+        toggleScript.disabled = true;
+        toggleRedPoints.disabled = true;
+        toggleFlexMode.disabled = true;
+        toggleScript.checked = false;
+        toggleRedPoints.checked = false;
+        toggleFlexMode.checked = false;
+
+        chrome.runtime.sendMessage({ action: "toggle", enabled: false });
+        chrome.runtime.sendMessage({
+          action: "toggleRedPoints",
+          enabled: false,
+        });
+        chrome.runtime.sendMessage({
+          action: "toggleFlexMode",
+          enabled: false,
+        });
+        location.reload();
+      } else {
+        toggleScript.disabled = false;
+        toggleRedPoints.disabled = false;
+        toggleFlexMode.disabled = false;
+        location.reload();
       }
     });
   }
